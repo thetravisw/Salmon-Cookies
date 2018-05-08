@@ -191,6 +191,9 @@ var alkiData = {
             //update the storeSalesArray
             storeSalesArray[i] = ["" + time, customers, Math.floor(customers * 630)/100];
 
+            //increment total sales
+            totalSales = totalSales + storeSalesArray[i][2];
+
             //Create New Li, assign it data, and append it.
             var list = document.getElementById('alki');
             var newLi = document.createElement('li');
