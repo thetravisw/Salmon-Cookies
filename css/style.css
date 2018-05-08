@@ -1,0 +1,63 @@
+header{
+    background-image: 'images/salmon.png';
+    border: 3px solid rebeccapurple;
+    text-align: center;
+    font-size: 5rem;
+    font-family: 'Cormorant Unicase', serif;
+    font-weight: bolder;
+    background-color: salmon;
+    background-image: url(https://github.com/codefellows/seattle-201d35/raw/master/class-06-dom-objects-domain_modeling/lab/assets/salmon.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-bottom: 5rem;
+    background-position: center;
+    color: rebeccapurple;
+    text-shadow: -1px -1px royalblue, 1px -1px royalblue, -1px 1px royalblue, 1px 1px royalblue;
+    position:relative;
+}
+
+#tagline{
+    font-family: 'Great Vibes', cursive;
+    position:absolute;
+    bottom:0;
+    width:100%;
+    text-align: center;
+    font-size: 4rem;
+}
+
+
+
+.navbar{
+    display: inline;
+    font-size: 2rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    color: white;
+    background-color:black;
+    border-radius: 30px;
+    border: 3px solid rebeccapurple;
+
+}
+
+body{
+    background-color: salmon;
+}
+
+li:not(.navbar) {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.3rem;
+}
+
+h2{
+    font-size: 2rem;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+}
+
+h1{
+    font-size: 3rem;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bolder;
+}
