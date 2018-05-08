@@ -4,7 +4,7 @@ var totalSales = 0, storeSalesArray = [[0, 0, 0]];
 // key to SSA:   [hour, total customers this hour, sales this hour.]
 
 var firstAndPikeData = {
-    name: 'firstAndPikeLocation',
+    name: 'First and Pike',
     minimumHourlyCustomers: 23,
     maximumHourlyCustomers: 65,
     averageCustomerSales: 6.3,
@@ -12,7 +12,8 @@ var firstAndPikeData = {
     {
         for (var i = 0; i < 15; i++) 
         {   //generate number of customers
-            var customers = Math.floor(Math.random() * (42) + 23);
+            var customers = Math.floor(Math.random() * (firstAndPikeData.maximumHourlyCustomers - firstAndPikeData.minimumHourlyCustomers) + 1 + firstAndPikeData.minimumHourlyCustomers);
+            
             //what time is it?
             if (i<7)
             {
@@ -53,7 +54,7 @@ var seaTacData = {
     {
         for (var i = 0; i < 15; i++) 
         {   //generate number of customers
-            var customers = Math.floor(Math.random() * (42) + 23);
+            var customers = Math.floor(Math.random() * (seaTacData.maximumHourlyCustomers - seaTacData.minimumHourlyCustomers) + 1 + seaTacData.minimumHourlyCustomers);
             //what time is it?
             if (i<7)
             {
@@ -94,7 +95,8 @@ var seattleCenterData = {
     {
         for (var i = 0; i < 15; i++) 
         {   //generate number of customers
-            var customers = Math.floor(Math.random() * (42) + 23);
+            var customers = Math.floor(Math.random() * (seattleCenterData.maximumHourlyCustomers - seattleCenterData.minimumHourlyCustomers) + 1 + seattleCenterData.minimumHourlyCustomers);
+            
             //what time is it?
             if (i<7)
             {
@@ -135,7 +137,7 @@ var capHillData = {
     {
         for (var i = 0; i < 15; i++) 
         {   //generate number of customers
-            var customers = Math.floor(Math.random() * (42) + 23);
+            var customers = Math.floor(Math.random() * (capHillData.maximumHourlyCustomers - capHillData.minimumHourlyCustomers) + 1 + capHillData.minimumHourlyCustomers);
             //what time is it?
             if (i<7)
             {
@@ -177,7 +179,8 @@ var alkiData = {
     {
         for (var i = 0; i < 15; i++) 
         {   //generate number of customers
-            var customers = Math.floor(Math.random() * (42) + 23);
+            var customers = Math.floor(Math.random() * (alkiData.maximumHourlyCustomers - alkiData.minimumHourlyCustomers) + 1 + alkiData.minimumHourlyCustomers);
+            
             //what time is it?
             if (i<7)
             {
