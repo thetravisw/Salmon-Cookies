@@ -119,7 +119,3 @@ seaTac.populateSalesAndRender();
 seattleCenter.populateSalesAndRender();
 capHill.populateSalesAndRender();
 alki.populateSalesAndRender();
-
-
-
-//Do the stretchy Yoga pants thang.

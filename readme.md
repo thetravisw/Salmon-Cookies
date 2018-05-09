@@ -14,5 +14,5 @@ JS.
 Not really doing much else
 
 ## Credits and Collaborations
-Fonts:  https://fonts.google.com/specimen/Cormorant+Unicase
-Fonts:  https://fonts.google.com/?selection.family=Great+Vibes
+Fonts via google-fonts
+Location information via wikipedia, seattletravel.com, and visitseattle.org
