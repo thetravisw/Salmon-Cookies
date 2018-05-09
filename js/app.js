@@ -1,219 +1,74 @@
 'use strict';
 
-var totalSales = 0, storeSalesArray = [[0, 0, 0]];
-// key to SSA:   [hour, total customers this hour, sales this hour.]
 
-var firstAndPikeData = {
-    name: 'First and Pike',
-    minimumHourlyCustomers: 23,
-    maximumHourlyCustomers: 65,
-    averageCustomerSales: 6.3,
-    renderSales: function () 
-    {
-        for (var i = 0; i < 15; i++) 
-        {   //generate number of customers
-            var customers = Math.floor(Math.random() * (firstAndPikeData.maximumHourlyCustomers - firstAndPikeData.minimumHourlyCustomers) + 1 + firstAndPikeData.minimumHourlyCustomers);
-            
-            //what time is it?
-            if (i<7)
-            {
-            var time = i + 6 + ' am';
-            }
-            else
-            {
-                var time = i-6 +' pm';
-            }
+//   Declare Global Variables =======================================
+var timeArray = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'], visitors = [], purchases = [];
+var salesTable = document.getElementById('salesTable');
 
-            //update the storeSalesArray
-            storeSalesArray[i] = ["" + time, customers, Math.floor(customers * 630)/100];
-           
-            //increment total sales
-            totalSales = totalSales + storeSalesArray[i][2];
-
-            //Create New Li, assign it data, and append it.
-            var list = document.getElementById('firstAndPike');
-            var newLi = document.createElement('li');
-            list.appendChild(newLi);
-            newLi.textContent = storeSalesArray[i][0] + ":  " + storeSalesArray[i][1] + " customers,  $" + Math.floor(storeSalesArray[i][2]) + " in sales";
-        }
-        
-        //Create New Li, assign it total-sales data, and append it.
-        var list = document.getElementById('firstAndPike');
-        var newLi = document.createElement('li');
-        list.appendChild(newLi);
-        newLi.textContent = "Total Sales:  $" + Math.floor(totalSales*100)/100;
-    }
+//   Build the Constructor Function  ===============================
+function Store(location, minimumHourlyCustomers, maximumHourlyCustomers, averageCustomerSales) {
+    this.location = location;
+    this.minimumHourlyCustomers = minimumHourlyCustomers;
+    this.maximumHourlyCustomers = maximumHourlyCustomers;
+    this.averageCustomerSales = averageCustomerSales;
 }
 
-var seaTacData = {
-    name: 'Sea Tac',
-    minimumHourlyCustomers: 3,
-    maximumHourlyCustomers: 24,
-    averageCustomerSales: 1.2,
-    renderSales: function () 
-    {
-        for (var i = 0; i < 15; i++) 
-        {   //generate number of customers
-            var customers = Math.floor(Math.random() * (seaTacData.maximumHourlyCustomers - seaTacData.minimumHourlyCustomers) + 1 + seaTacData.minimumHourlyCustomers);
-            //what time is it?
-            if (i<7)
-            {
-            var time = i + 6 + ' am';
-            }
-            else
-            {
-                var time = i-6 +' pm';
-            }
+//  Build the Method for the constructor function =================
 
-            //update the storeSalesArray
-            storeSalesArray[i] = ["" + time, customers, Math.floor(customers * 630)/100];
-           
-            //increment total sales
-            totalSales = totalSales + storeSalesArray[i][2];
+Store.prototype.populateSalesAndRender = function () {
+    var totalSales = 0
 
-            //Create New Li, assign it data, and append it.
-            var list = document.getElementById('seaTac');
-            var newLi = document.createElement('li');
-            list.appendChild(newLi);
-            newLi.textContent = storeSalesArray[i][0] + ":  " + storeSalesArray[i][1] + " customers,  $" + storeSalesArray[i][2] + " in sales";
-        }
-        
-        //Create New Li for total sales, assign it total-sales data, and append it.
-        var list = document.getElementById('seaTac');
-        var newLi = document.createElement('li');
-        list.appendChild(newLi);
-        newLi.textContent = "Total Sales:  $" + Math.floor(totalSales*100)/100;
+    //seed the table
+    var newTr = document.createElement('tr');
+    var newTd = document.createElement('td');
+    newTd.textContent = '' + this.location;
+    newTr.appendChild(newTd);
+
+    for (var i in timeArray) {
+        //  Calculate Visitors and Sales, and Populate Arrays
+        visitors[i] = Math.floor(Math.random() * (this.maximumHourlyCustomers - this.minimumHourlyCustomers) + 1 + this.minimumHourlyCustomers);
+
+        purchases[i] = Math.floor(100 * visitors[i] * this.averageCustomerSales) / 100;
+
+        totalSales = purchases[i] + totalSales;
+
+        //  Render in the Table
+
+        newTd = document.createElement('td');
+        newTd.textContent = '$' + purchases[i];
+        newTr.appendChild(newTd);  
     }
+    salesTable.appendChild(newTr)
 }
 
-var seattleCenterData = {
-    name: 'Seattle Center',
-    minimumHourlyCustomers: 11,
-    maximumHourlyCustomers: 38,
-    averageCustomerSales: 3.7,
-    renderSales: function () 
-    {
-        for (var i = 0; i < 15; i++) 
-        {   //generate number of customers
-            var customers = Math.floor(Math.random() * (seattleCenterData.maximumHourlyCustomers - seattleCenterData.minimumHourlyCustomers) + 1 + seattleCenterData.minimumHourlyCustomers);
-            
-            //what time is it?
-            if (i<7)
-            {
-            var time = i + 6 + ' am';
-            }
-            else
-            {
-                var time = i-6 +' pm';
-            }
+//  Build Table header  ================================================
 
-            //update the storeSalesArray
-            storeSalesArray[i] = ["" + time, customers, Math.floor(customers * 630)/100];
-           
-            //increment total sales
-            totalSales = totalSales + storeSalesArray[i][2];
+var newTr = document.createElement('tr');
+var newTh = document.createElement('th');
+newTh.textContent = '';
+newTr.appendChild(newTh);
 
-            //Create New Li, assign it data, and append it.
-            var list = document.getElementById('seattleCenter');
-            var newLi = document.createElement('li');
-            list.appendChild(newLi);
-            newLi.textContent = storeSalesArray[i][0] + ":  " + storeSalesArray[i][1] + " customers,  $" + storeSalesArray[i][2] + " in sales";
-        }
-        
-        //Create New Li for total sales, assign it total-sales data, and append it.
-        var list = document.getElementById('seattleCenter');
-        var newLi = document.createElement('li');
-        list.appendChild(newLi);
-        newLi.textContent = "Total Sales:  $" + Math.floor(totalSales*100)/100;
-    }
+for (var i in timeArray) {
+    newTh = document.createElement('th');
+    newTh.textContent = '' + timeArray[i];
+    newTr.appendChild(newTh);
 }
 
-var capHillData = {
-    name: 'Cap Hill',
-    minimumHourlyCustomers: 20,
-    maximumHourlyCustomers: 38,
-    averageCustomerSales: 2.3,
-    renderSales: function () 
-    {
-        for (var i = 0; i < 15; i++) 
-        {   //generate number of customers
-            var customers = Math.floor(Math.random() * (capHillData.maximumHourlyCustomers - capHillData.minimumHourlyCustomers) + 1 + capHillData.minimumHourlyCustomers);
-            //what time is it?
-            if (i<7)
-            {
-            var time = i + 6 + ' am';
-            }
-            else
-            {
-                var time = i-6 +' pm';
-            }
+// append the tr to the table
+salesTable.appendChild(newTr);
 
-            //update the storeSalesArray
-            storeSalesArray[i] = ["" + time, customers, Math.floor(customers * 630)/100];
-           
-            //increment total sales
-            totalSales = totalSales + storeSalesArray[i][2];
+//  Call the constructor function   ===============================
+var firstAndPike = new Store('First And Pike', 23, 65, 6.3);
+var seaTac = new Store('Sea Tac', 3, 24, 1.2);
+var seattleCenter = new Store('Seattle Center', 11, 38, 3.7);
+var capHill = new Store('Cap Hill', 20, 38, 2.3);
+var alki = new Store('Alki', 2, 16, 4.6);
 
 
-            //Create New Li, assign it data, and append it.
-            var list = document.getElementById('capHil');
-            var newLi = document.createElement('li');
-            list.appendChild(newLi);
-            newLi.textContent = storeSalesArray[i][0] + ":  " + storeSalesArray[i][1] + " customers,  $" + storeSalesArray[i][2] + " in sales";
-        }
-        
-        //Create New Li, assign it total-sales data, and append it.
-        var list = document.getElementById('capHil');
-        var newLi = document.createElement('li');
-        list.appendChild(newLi);
-        newLi.textContent = "Total Sales:  $" + Math.floor(totalSales*100)/100;
-    }
-}
+//   Party cause it's done... or Cry in beer cause it's Broken  ====
 
-var alkiData = {
-    name: 'Alki',
-    minimumHourlyCustomers: 2,
-    maximumHourlyCustomers: 16,
-    averageCustomerSales: 4.6,
-    renderSales: function () 
-    {
-        for (var i = 0; i < 15; i++) 
-        {   //generate number of customers
-            var customers = Math.floor(Math.random() * (alkiData.maximumHourlyCustomers - alkiData.minimumHourlyCustomers) + 1 + alkiData.minimumHourlyCustomers);
-            
-            //what time is it?
-            if (i<7)
-            {
-            var time = i + 6 + ' am';
-            }
-            else
-            {
-                var time = i-6 +' pm';
-            }
-
-            //update the storeSalesArray
-            storeSalesArray[i] = ["" + time, customers, Math.floor(customers * 630)/100];
-
-            //increment total sales
-            totalSales = totalSales + storeSalesArray[i][2];
-
-            //Create New Li, assign it data, and append it.
-            var list = document.getElementById('alki');
-            var newLi = document.createElement('li');
-            list.appendChild(newLi);
-            newLi.textContent = storeSalesArray[i][0] + ":  " + storeSalesArray[i][1] + " customers,  $" + storeSalesArray[i][2] + " in sales";
-        }
-        
-        //Create New Li, assign it total-sales data, and append it.
-        var list = document.getElementById('alki');
-        var newLi = document.createElement('li');
-        list.appendChild(newLi);
-        newLi.textContent = "Total Sales:  $" + Math.floor(totalSales*100)/100;
-    }
-}
-
-firstAndPikeData.renderSales.call();
-seaTacData.renderSales.call();
-seattleCenterData.renderSales.call();
-capHillData.renderSales.call();
-alkiData.renderSales.call();
+firstAndPike.populateSalesAndRender();
+seaTac.populateSalesAndRender();
+seattleCenter.populateSalesAndRender();
+capHill.populateSalesAndRender();
+alki.populateSalesAndRender();
