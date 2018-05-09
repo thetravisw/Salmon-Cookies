@@ -1,7 +1,7 @@
 ## Salmon Kookies
 
 **Author**  Travis Williams
-**Version**: 1.0.3
+**Version**: 1.1.8
 
 ## Overview
 My home-girl pat thinks she's gonna get rich selling Salmon Cookies to tourists.  She's an idiot, but I built her a website anyways... largely because she's imaginary and this is a class project.   We're tracking sales (randomized) and providing a front-facing UI.

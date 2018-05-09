@@ -2,7 +2,7 @@
 
 
 //   Declare Global Variables =======================================
-var timeArray = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'], visitors = [], purchases = [], EmployeesNeeded = [];
+var timeArray = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
 var salesTable = document.getElementById('salesTable');
 var yogaTable = document.getElementById('EmployeesNeeded');
 //   Build the Constructor Function  ===============================
@@ -11,6 +11,9 @@ function Store(location, minimumHourlyCustomers, maximumHourlyCustomers, average
     this.minimumHourlyCustomers = minimumHourlyCustomers;
     this.maximumHourlyCustomers = maximumHourlyCustomers;
     this.averageCustomerSales = averageCustomerSales;
+    this.visitors = [];
+    this.purchases = [];
+    this.employeesNeeded = [];
 }
 
 //  Build the Method for the constructor function =================
@@ -35,27 +38,27 @@ Store.prototype.populateSalesAndRender = function () {
 
     //build Table Row in for loop (mostly)
     for (var i in timeArray) {
-        //  Calculate Visitors and Sales, and Populate Arrays
-        visitors[i] = Math.floor(Math.random() * (this.maximumHourlyCustomers - this.minimumHourlyCustomers) + 1 + this.minimumHourlyCustomers);
+        //  Calculate visitors and Sales, and Populate Arrays
+        this.visitors[i] = Math.floor(Math.random() * (this.maximumHourlyCustomers - this.minimumHourlyCustomers) + 1 + this.minimumHourlyCustomers);
 
-        purchases[i] = Math.floor(100 * visitors[i] * this.averageCustomerSales) / 100;
+        this.purchases[i] = Math.floor(100 * this.visitors[i] * this.averageCustomerSales) / 100;
 
-        totalSales = purchases[i] + totalSales;
+        totalSales = this.purchases[i] + totalSales;
 
-        //  Yoga:  Calculate Employees needed  [visitors/20, minimum 2]
-        EmployeesNeeded[i] = Math.ceil(visitors[i]/20 );
-        if (EmployeesNeeded[i] < 2){EmployeesNeeded[i]=2;}
+        //  Yoga:  Calculate Employees needed  [this.visitors/20, minimum 2]
+        this.employeesNeeded[i] = Math.ceil(this.visitors[i]/20 );
+        if (this.employeesNeeded[i] < 2){this.employeesNeeded[i]=2;}
         
         //  Render in the Table
 
         newTd = document.createElement('td');
-        newTd.textContent = '$' + purchases[i];
+        newTd.textContent = '$' + this.purchases[i];
         newTr.appendChild(newTd);  
 
         //Yoga:  Render into employees needed table
 
         tdYoga = document.createElement('td');
-        tdYoga.textContent = ''+ EmployeesNeeded[i];
+        tdYoga.textContent = ''+ this.employeesNeeded[i];
         trYoga.appendChild(tdYoga); 
     }
 
