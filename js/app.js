@@ -122,3 +122,23 @@ seaTac.populateSalesAndRender();
 seattleCenter.populateSalesAndRender();
 capHill.populateSalesAndRender();
 alki.populateSalesAndRender();
+
+///  Wednesday's Code  =============================================
+
+//  Event Listener on #NewStoreForm
+NewStoreForm.addEventListener('submit', NewStoreSubmitted);  
+
+//  New Store Submitted Function  =================================
+
+function NewStoreSubmitted(event){
+    event.preventDefault();
+    var newStoreName = event.target.newStoreLocation.value;    
+    var maxCustomers = event.target.maxCustomers.value;
+    var minCustomers = event.target.minCustomers.value;
+    var avgSales = event.target.customerSales.value;
+
+    var newStore = new Store(newStoreName,minCustomers,maxCustomers,avgSales);
+  
+    newStore.populateSalesAndRender();
+
+}
