@@ -144,3 +144,5 @@ function NewStoreSubmitted(event) {
     newStore.populateSalesAndRender();
 
 }
+
+//done
