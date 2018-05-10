@@ -1,10 +1,20 @@
 'use strict';
 
+/* To do list for Thursday
+Switch to an array of stores, making it easier to add new ones
+switch new stores to push.
+
+Change from single method on Pop/Render to multiple ones, to improve readability. 
+
+Add row for hourly sales total.
+*/
+
 
 //   Declare Global Variables =======================================
 var timeArray = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
 var salesTable = document.getElementById('salesTable');
 var yogaTable = document.getElementById('EmployeesNeeded');
+
 //   Build the Constructor Function  ===============================
 function Store(location, minimumHourlyCustomers, maximumHourlyCustomers, averageCustomerSales) {
     this.location = location;
@@ -27,10 +37,12 @@ Store.prototype.populateSalesAndRender = function () {
     newTd.textContent = '' + this.location;
     newTr.appendChild(newTd);
 
+    
     //Yoga Pants Seeding  ===  'Cause they so Streeeetchy
     //Also, I'm hencefort using Yoga to indicate strecth goal work
     //for this project.
-
+    var newTr
+    
     var trYoga = document.createElement('tr');
     var tdYoga = document.createElement('td');
     tdYoga.textContent = '' + this.location;
