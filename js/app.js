@@ -46,25 +46,25 @@ Store.prototype.populateSalesAndRender = function () {
         totalSales = this.purchases[i] + totalSales;
 
         //  Yoga:  Calculate Employees needed  [this.visitors/20, minimum 2]
-        this.employeesNeeded[i] = Math.ceil(this.visitors[i]/20 );
-        if (this.employeesNeeded[i] < 2){this.employeesNeeded[i]=2;}
-        
+        this.employeesNeeded[i] = Math.ceil(this.visitors[i] / 20);
+        if (this.employeesNeeded[i] < 2) { this.employeesNeeded[i] = 2; }
+
         //  Render in the Table
 
         newTd = document.createElement('td');
         newTd.textContent = '$' + this.purchases[i];
-        newTr.appendChild(newTd);  
+        newTr.appendChild(newTd);
 
         //Yoga:  Render into employees needed table
 
         tdYoga = document.createElement('td');
-        tdYoga.textContent = ''+ this.employeesNeeded[i];
-        trYoga.appendChild(tdYoga); 
+        tdYoga.textContent = '' + this.employeesNeeded[i];
+        trYoga.appendChild(tdYoga);
     }
 
     // total sales
     newTd = document.createElement('td');
-    newTd.textContent = '$' + Math.floor(totalSales*100)/100;
+    newTd.textContent = '$' + Math.floor(totalSales * 100) / 100;
     newTr.appendChild(newTd);
 
     //append completed Tr to table
@@ -100,7 +100,7 @@ for (var i in timeArray) {
 
 //Daily Sales Header
 newTh = document.createElement('th');
-newTh.textContent='Daily Sales';
+newTh.textContent = 'Daily Sales';
 newTr.appendChild(newTh);
 
 // append the tr to the table
@@ -126,19 +126,21 @@ alki.populateSalesAndRender();
 ///  Wednesday's Code  =============================================
 
 //  Event Listener on #NewStoreForm
-NewStoreForm.addEventListener('submit', NewStoreSubmitted);  
+var NewStoreForm = document.getElementById('NewStoreForm');
+
+NewStoreForm.addEventListener('submit', NewStoreSubmitted);
 
 //  New Store Submitted Function  =================================
 
-function NewStoreSubmitted(event){
+function NewStoreSubmitted(event) {
     event.preventDefault();
-    var newStoreName = event.target.newStoreLocation.value;    
+    var newStoreName = event.target.newStoreLocation.value;
     var maxCustomers = event.target.maxCustomers.value;
     var minCustomers = event.target.minCustomers.value;
     var avgSales = event.target.customerSales.value;
 
-    var newStore = new Store(newStoreName,minCustomers,maxCustomers,avgSales);
-  
+    var newStore = new Store(newStoreName, minCustomers, maxCustomers, avgSales);
+
     newStore.populateSalesAndRender();
 
 }

@@ -2,14 +2,14 @@ table {
     border: 3px solid black;
     margin-left:auto; 
     margin-right:auto;
-    width: 98%
+    width: 98vw;
 }
 
 iframe{
     border: 4px solid black;
-    margin-left:25%; 
-    margin-right:25%;
-    width: 50%;
+    margin-left:25vw;
+    margin-right:25vw;
+    width: 50vw;
 }
 
 
@@ -59,7 +59,7 @@ header{
     font-family: 'Great Vibes', cursive;
     position:absolute;
     bottom:0;
-    width:100%;
+    width:100vw;
     text-align: center;
     font-size: 4rem;
 }
@@ -105,8 +105,8 @@ h1{
     text-align: center;
 }
 p:not(#tagline){
-    padding-left: 20%;
-    padding-right: 20%;
+    padding-left: 20vw;
+    padding-right: 20vw;
     padding-bottom: 30px;
     font-family: 'Raleway', sans-serif;
     font-size:2rem;
@@ -114,10 +114,12 @@ p:not(#tagline){
 }
 
 
-/*Style the form.   CSS lifted directly from sam */
+/*===================================================================
+Styling the New Store Form
+====================================================================*/
 
 input {
-    border: 3px solid #73094c;
+    border: 3px solid rebeccapurple;
     border-radius: 8px;
     padding: 5px 5px 5px 5px;
     margin: 15px;
@@ -130,11 +132,11 @@ input {
   }
   
   fieldset {
-    max-width: 700px;
-    border: 7px solid #73094c;
+    max-width: 80vw;
+    border: 7px solid rebeccapurple;
     border-radius: 75px;
     padding: 10px;
-    text-align: center;
+    text-align: left;
   }
   
   legend {
@@ -149,7 +151,7 @@ input {
   }
   
   button {
-    color: #73094c;
+    color: rgb(28, 0, 73);
     text-shadow: 0px 1px 1px #ffffff;
     border: 2px solid #b2b2b2;
     background-color: #73094c;
@@ -157,6 +159,8 @@ input {
     background: -moz-linear-gradient(top, #F0E8C7, #9C9060);
     background: -o-linear-gradient(top, #F0E8C7, #9C9060);
     background: -ms-linear-gradient(top, #F0E8C7, #9C9060);
+    float: right;
+    margin-right: 13vw
   }
 
 
