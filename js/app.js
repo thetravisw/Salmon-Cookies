@@ -1,11 +1,14 @@
 'use strict';
 
 
-//   Declare Global Variables =======================================
+//   ====================         Declare Global Variables     ===============================
 var timeArray = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
-var salesTable = document.getElementById('salesTable');
-var yogaTable = document.getElementById('EmployeesNeeded');
-//   Build the Constructor Function  ===============================
+var storeSalesTable = document.getElementById('salesTable');
+var employeesNeededTable = document.getElementById('EmployeesNeeded');
+var arrayOfStores = []
+
+
+//   ====================      Store Constructor Function       ==============================
 function Store(location, minimumHourlyCustomers, maximumHourlyCustomers, averageCustomerSales) {
     this.location = location;
     this.minimumHourlyCustomers = minimumHourlyCustomers;
@@ -14,120 +17,156 @@ function Store(location, minimumHourlyCustomers, maximumHourlyCustomers, average
     this.visitors = [];
     this.purchases = [];
     this.employeesNeeded = [];
+    this.totalStoreSales=0;
 }
 
-//  Build the Method for the constructor function =================
 
-Store.prototype.populateSalesAndRender = function () {
-    var totalSales = 0
+//   ===============       Method for calculating total store visitors.        ================
+Store.prototype.calculatevisitors = function () {
+    for (var i in timeArray) {
+        this.visitors[i] = Math.floor(Math.random() * (this.maximumHourlyCustomers - this.minimumHourlyCustomers) + 1 + this.minimumHourlyCustomers);
+    }
+}
 
-    //seed the table
+//   ==============         Method for calculating store sales.            ======================
+Store.prototype.calculatesales = function () {
+    this.calculatevisitors();
+    for (var i in timeArray) {
+        this.purchases[i] = Math.floor(this.visitors[i] * this.averageCustomerSales);
+    }
+}
+
+//   =================      Method for calculating employees needed.        ======================
+//   =====  Can only be run after this.calculate visitors (or this.calculatesales)
+
+Store.prototype.calculateemployees = function () {
+    var empNeeded = 0;
+    for (var i in timeArray) {
+        empNeeded = Math.ceil(this.visitors[i] / 20)
+        if (empNeeded < 2) {
+            empNeeded = 2;
+        }
+        this.employeesNeeded[i] = empNeeded;
+    }
+}
+
+
+//   ===============           Render this.purchases into salesTable           ====================
+Store.prototype.renderPurchases = function () {
+    this.calculatesales();
+    this.calculateemployees();
+
+    //Do the header
     var newTr = document.createElement('tr');
-    var newTd = document.createElement('td');
+    var newTd = document.createElement('th');
     newTd.textContent = '' + this.location;
     newTr.appendChild(newTd);
 
-    //Yoga Pants Seeding  ===  'Cause they so Streeeetchy
-    //Also, I'm hencefort using Yoga to indicate strecth goal work
-    //for this project.
+    var totalStoreSales=0;
 
-    var trYoga = document.createElement('tr');
-    var tdYoga = document.createElement('td');
-    tdYoga.textContent = '' + this.location;
-    trYoga.appendChild(tdYoga);
-
-    //build Table Row in for loop (mostly)
+    //Do the Data  (Calc Total Store Sales as you go)
     for (var i in timeArray) {
-        //  Calculate visitors and Sales, and Populate Arrays
-        this.visitors[i] = Math.floor(Math.random() * (this.maximumHourlyCustomers - this.minimumHourlyCustomers) + 1 + this.minimumHourlyCustomers);
-
-        this.purchases[i] = Math.floor(100 * this.visitors[i] * this.averageCustomerSales) / 100;
-
-        totalSales = this.purchases[i] + totalSales;
-
-        //  Yoga:  Calculate Employees needed  [this.visitors/20, minimum 2]
-        this.employeesNeeded[i] = Math.ceil(this.visitors[i] / 20);
-        if (this.employeesNeeded[i] < 2) { this.employeesNeeded[i] = 2; }
-
-        //  Render in the Table
-
         newTd = document.createElement('td');
         newTd.textContent = '$' + this.purchases[i];
+        this.totalStoreSales += this.purchases[i];
         newTr.appendChild(newTd);
-
-        //Yoga:  Render into employees needed table
-
-        tdYoga = document.createElement('td');
-        tdYoga.textContent = '' + this.employeesNeeded[i];
-        trYoga.appendChild(tdYoga);
     }
 
-    // total sales
+
     newTd = document.createElement('td');
-    newTd.textContent = '$' + Math.floor(totalSales * 100) / 100;
+    newTd.textContent = '' +this.totalStoreSales;
+    newTr.appendChild(newTd);
+    storeSalesTable.appendChild(newTr);
+}
+
+
+//   ===============           Render this.employeesNeeded into salesTable           ====================
+
+Store.prototype.renderEmployees = function () {
+
+    this.calculateemployees()
+    //Do the header
+    var newTr = document.createElement('tr');
+    var newTd = document.createElement('th');
+    newTd.textContent = '' + this.location;
     newTr.appendChild(newTd);
 
-    //append completed Tr to table
-    salesTable.appendChild(newTr);
-    yogaTable.appendChild(trYoga);
+    //Do the Data
+    for (var i in timeArray) {
+        newTd = document.createElement('td');
+        newTd.textContent = this.employeesNeeded[i];
+        newTr.appendChild(newTd);
+    }
+    employeesNeededTable.appendChild(newTr);
 }
 
-//  Build Table header  ================================================
 
-var newTr = document.createElement('tr');
+
+//================================================================================================
+Store.prototype.render = function() {
+    this.renderPurchases();
+    this.renderEmployees();
+}
+
+//   =======================        Build out the Header row of Tables   ===================
+//Sales Information
 var newTh = document.createElement('th');
-newTh.textContent = 'Location';
+var newTr = document.createElement('tr');
+newTh.textContent = 'Store Name';
 newTr.appendChild(newTh);
-
-//  Yoga Pants Header
-var trYoga = document.createElement('tr');
-var thYoga = document.createElement('th');
-thYoga.textContent = 'Location';
-trYoga.appendChild(thYoga);
-
 
 for (var i in timeArray) {
-    //create Header elements
     newTh = document.createElement('th');
-    newTh.textContent = '' + timeArray[i];
+    newTh.textContent = timeArray[i];
     newTr.appendChild(newTh);
-
-    //  Headers for Yoga Pants
-    thYoga = document.createElement('th');
-    thYoga.textContent = '' + timeArray[i];
-    trYoga.appendChild(thYoga);
 }
 
-//Daily Sales Header
 newTh = document.createElement('th');
-newTh.textContent = 'Daily Sales';
+newTh.textContent = 'Total Sales';
 newTr.appendChild(newTh);
 
-// append the tr to the table
-salesTable.appendChild(newTr);
-yogaTable.appendChild(trYoga);
+storeSalesTable.appendChild(newTr);
 
+//Employees Needed
+var newTh = document.createElement('th');
+var newTr = document.createElement('tr');
+newTh.textContent = 'Store Name';
+newTr.appendChild(newTh);
 
-//  Call the constructor function   ===============================
+for (var i in timeArray) {
+    newTh = document.createElement('th');
+    newTh.textContent = timeArray[i];
+    newTr.appendChild(newTh);
+}
+
+employeesNeededTable.appendChild(newTr)
+
+//   ========================    Construct and Render   ===============================
 var firstAndPike = new Store('First And Pike', 23, 65, 6.3);
+arrayOfStores.push(firstAndPike);
+firstAndPike.render();
+
 var seaTac = new Store('Sea Tac', 3, 24, 1.2);
+arrayOfStores.push(seaTac);
+seaTac.render();
+
 var seattleCenter = new Store('Seattle Center', 11, 38, 3.7);
-var capHill = new Store('Cap Hill', 20, 38, 2.3);
+arrayOfStores.push(seattleCenter)
+seattleCenter.render();
+
+var capHill = new Store('Capitol Hill', 20, 38, 2.3);
+arrayOfStores.push(capHill);
+capHill.render();
+
 var alki = new Store('Alki', 2, 16, 4.6);
+arrayOfStores.push(alki);
+alki.render();
 
-//   Party cause it's done... or Cry in beer cause it's Broken  ====
 
-firstAndPike.populateSalesAndRender();
-seaTac.populateSalesAndRender();
-seattleCenter.populateSalesAndRender();
-capHill.populateSalesAndRender();
-alki.populateSalesAndRender();
-
-///  Wednesday's Code  =============================================
-
-//  Event Listener on #NewStoreForm
+ 
+//  Wednesday's Code  =============================================
+//Event Listener on #NewStoreForm
 var NewStoreForm = document.getElementById('NewStoreForm');
-
 NewStoreForm.addEventListener('submit', NewStoreSubmitted);
 
 //  New Store Submitted Function  =================================
@@ -138,11 +177,41 @@ function NewStoreSubmitted(event) {
     var maxCustomers = event.target.maxCustomers.value;
     var minCustomers = event.target.minCustomers.value;
     var avgSales = event.target.customerSales.value;
-
     var newStore = new Store(newStoreName, minCustomers, maxCustomers, avgSales);
-
-    newStore.populateSalesAndRender();
-
+    newStore.render();
+    arrayOfStores.push(newStore);    
 }
 
-//done
+//   Hourly Sales =================================================
+//   Left Header
+var newTd = document.createElement('th');
+var newTr = document.createElement('tr');
+newTd.textContent = 'Total';
+newTr.appendChild(newTd);
+
+
+//  Nested for loops, to compute hourly sales and append them to a new row.
+
+for (var i in timeArray){
+    var hourlySales =0;
+    newTd = document.createElement('td');
+    for (var j in arrayOfStores){
+        hourlySales = hourlySales + arrayOfStores[j].purchases[i];
+    }
+    newTd.textContent=''+hourlySales;
+    newTr.appendChild(newTd);
+}
+//Total Sales
+var totalStoreSales = 0
+newTd = document.createElement('td');
+for (var i in arrayOfStores){
+    totalStoreSales += arrayOfStores[i].totalStoreSales
+}
+var newTd = document.createElement('td');
+newTd.textContent = '' + totalStoreSales;
+newTr.appendChild(newTd);
+
+
+storeSalesTable.appendChild(newTr);
+
+//  ===========================================================================

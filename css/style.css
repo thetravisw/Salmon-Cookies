@@ -26,7 +26,33 @@ tr:nth-child(2n){
     background-color: white;
 }
 
+#cutter{
+    float: right;
+    padding: 30px;
+}
 
+#family{
+    padding-top: 25px;
+    padding-bottom: 10px;
+    display: block;
+    margin: auto;
+    width: 60%;
+}
+
+#shirt{
+    float: left;
+    margin-right: 25px;
+    padding-left:  100px;
+}
+
+figcaption{
+    font-style: italic;
+    text-align: center
+}
+
+figure{
+    margin-bottom: 30px;
+}
 
 th {
 	background-color: rgb(2, 92, 65);
@@ -85,11 +111,6 @@ body{
     background-color: salmon;
 }
 
-li:not(.navbar) {
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 1.3rem;
-}
-
 h2{
     font-size: 2rem;
     font-family: 'Times New Roman', Times, serif;
@@ -97,6 +118,7 @@ h2{
 }
 
 h1{
+    color: rebeccapurple;
     font-size: 3rem;
     font-family: 'Times New Roman', Times, serif;
     font-weight: bolder;
@@ -105,12 +127,45 @@ h1{
     text-align: center;
 }
 p:not(#tagline){
-    padding-left: 20vw;
-    padding-right: 20vw;
+    padding-left: 10vw;
+    padding-right: 10vw;
     padding-bottom: 30px;
     font-family: 'Raleway', sans-serif;
-    font-size:2rem;
-    font-weight: 900
+    font-size:1.5rem;
+    font-weight: 700;
+    font-style: italic;
+}
+
+/* =================================================================
+Styling the Menu
+==================================================================== */
+.LeftNRight{
+    margin-top: 5%;
+    display: inline-block;
+    margin-left: 12%;
+    width: 30%;
+}
+
+h3{
+    text-align: center;
+    margin-bottom: 2%;
+    font-weight: bolder;
+    color: rgb(28, 0, 73);
+    font-size: 1.8rem;
+    padding-bottom: 6%;
+}
+
+#gross{
+    display: inline;
+    float: right;
+    min-width: 38%;
+    max-width: 38%;
+}
+
+li:not(.navbar) {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.3rem;
+    padding-bottom: 6%;
 }
 
 
@@ -123,12 +178,10 @@ input {
     border-radius: 8px;
     padding: 5px 5px 5px 5px;
     margin: 15px;
-    /*display: block;*/
   }
   
   label {
     color: white;
-    /*display: block;*/
   }
   
   fieldset {
