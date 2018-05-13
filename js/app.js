@@ -7,7 +7,6 @@ var storeSalesTable = document.getElementById('salesTable');
 var employeesNeededTable = document.getElementById('EmployeesNeeded');
 var arrayOfStores = []
 
-
 //   ====================      Store Constructor Function       ==============================
 function Store(location, minimumHourlyCustomers, maximumHourlyCustomers, averageCustomerSales) {
     this.location = location;
@@ -37,7 +36,7 @@ Store.prototype.calculatesales = function () {
 }
 
 //   =================      Method for calculating employees needed.        ======================
-//   =====  Can only be run after this.calculate visitors (or this.calculatesales)
+//  Can only be run after this.calculate visitors (or this.calculatesales -- which runs cal visitors)
 
 Store.prototype.calculateemployees = function () {
     var empNeeded = 0;
@@ -49,7 +48,6 @@ Store.prototype.calculateemployees = function () {
         this.employeesNeeded[i] = empNeeded;
     }
 }
-
 
 //   ===============           Render this.purchases into salesTable           ====================
 Store.prototype.renderPurchases = function () {
@@ -100,15 +98,13 @@ Store.prototype.renderEmployees = function () {
     employeesNeededTable.appendChild(newTr);
 }
 
-
-
 //================================================================================================
 Store.prototype.render = function() {
     this.renderPurchases();
     this.renderEmployees();
 }
 
-//   =======================        Build out the Header row of Tables   ===================
+//   ==================   Build out the Header row of Tables   ===================================
 //Sales Information
 var newTh = document.createElement('th');
 var newTr = document.createElement('tr');
@@ -161,7 +157,6 @@ capHill.render();
 var alki = new Store('Alki', 2, 16, 4.6);
 arrayOfStores.push(alki);
 alki.render();
-
 
  
 //  Wednesday's Code  =============================================
