@@ -206,12 +206,8 @@ input {
   button {
     color: rgb(28, 0, 73);
     text-shadow: 0px 1px 1px #ffffff;
-    border: 2px solid #b2b2b2;
-    background-color: #73094c;
-    background: -webkit-gradient(linear, left top, left bottom, from(#F0E8C7), to(#9C9060));
-    background: -moz-linear-gradient(top, #F0E8C7, #9C9060);
-    background: -o-linear-gradient(top, #F0E8C7, #9C9060);
-    background: -ms-linear-gradient(top, #F0E8C7, #9C9060);
+    border: 6px solid grey;
+    background-color: grey;
     float: right;
     margin-right: 13vw
   }

@@ -1,11 +1,10 @@
 'use strict';
 
-
 //   ====================         Declare Global Variables     ===============================
 var timeArray = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
 var storeSalesTable = document.getElementById('salesTable');
 var employeesNeededTable = document.getElementById('EmployeesNeeded');
-var arrayOfStores = []
+var arrayOfStores = [];
 
 //   ====================      Store Constructor Function       ==============================
 function Store(location, minimumHourlyCustomers, maximumHourlyCustomers, averageCustomerSales) {
@@ -18,7 +17,6 @@ function Store(location, minimumHourlyCustomers, maximumHourlyCustomers, average
     this.employeesNeeded = [];
     this.totalStoreSales=0;
 }
-
 
 //   ===============       Method for calculating total store visitors.        ================
 Store.prototype.calculatevisitors = function () {
@@ -174,7 +172,10 @@ function NewStoreSubmitted(event) {
     var avgSales = event.target.customerSales.value;
     var newStore = new Store(newStoreName, minCustomers, maxCustomers, avgSales);
     newStore.render();
-    arrayOfStores.push(newStore);    
+    arrayOfStores.push(newStore); 
+    
+    //Reset the New Store Form
+
 }
 
 //   Hourly Sales =================================================
