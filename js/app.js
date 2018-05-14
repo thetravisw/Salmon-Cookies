@@ -96,50 +96,49 @@ Store.prototype.renderEmployees = function () {
     employeesNeededTable.appendChild(newTr);
 }
 
-//================================================================================================
-function renderAll () {
-//  Clear Previous Table
-storeSalesTable.innerHTML='';
-employeesNeededTable.innerHTML='';
+//=======  Creates Table Headers and Renders all Stores   =======================
+function renderAll() {
+    //  Clear Previous Table
+    storeSalesTable.innerHTML = '';
+    employeesNeededTable.innerHTML = '';
 
-//  Render All Stores
+    //  Render All Stores
     for (var j in arrayOfStores) {
         arrayOfStores[j].renderPurchases();
         arrayOfStores[j].renderEmployees();
-        
+
     }
 
-//   Hourly Sales =================================================
-//   Left Header
-var newTd = document.createElement('th');
-var newTr = document.createElement('tr');
-newTd.textContent = 'Total';
-newTr.appendChild(newTd);
-
-
-//  Nested for loops, to compute hourly sales and append them to a new row.
-
-for (var i in timeArray) {
-    var hourlySales = 0;
-    newTd = document.createElement('td');
-    for (var j in arrayOfStores) {
-        hourlySales = hourlySales + arrayOfStores[j].purchases[i];
-    }
-    newTd.textContent = '' + hourlySales;
+    //   =====   Hourly Sales  ======
+    //   Left Header
+    var newTd = document.createElement('th');
+    var newTr = document.createElement('tr');
+    newTd.textContent = 'Total';
     newTr.appendChild(newTd);
-}
-//Total Sales
-var totalStoreSales = 0
-newTd = document.createElement('td');
-for (var i in arrayOfStores) {
-    totalStoreSales += arrayOfStores[i].totalStoreSales
-}
-var newTd = document.createElement('td');
-newTd.textContent = '' + totalStoreSales;
-newTr.appendChild(newTd);
 
 
-storeSalesTable.appendChild(newTr);
+    //  Nested for loops, to compute hourly sales and append them to a new row.
+
+    for (var i in timeArray) {
+        var hourlySales = 0;
+        newTd = document.createElement('td');
+        for (var j in arrayOfStores) {
+            hourlySales = hourlySales + arrayOfStores[j].purchases[i];
+        }
+        newTd.textContent = '' + hourlySales;
+        newTr.appendChild(newTd);
+    }
+    //Total Sales
+    var totalStoreSales = 0
+    newTd = document.createElement('td');
+    for (var i in arrayOfStores) {
+        totalStoreSales += arrayOfStores[i].totalStoreSales
+    }
+    var newTd = document.createElement('td');
+    newTd.textContent = '' + totalStoreSales;
+    newTr.appendChild(newTd);
+
+    storeSalesTable.appendChild(newTr);
 }
 
 //   ==================   Build out the Header row of Tables   ===================================
@@ -193,16 +192,15 @@ NewStoreForm.addEventListener('submit', NewStoreSubmitted);
 function NewStoreSubmitted(event) {
     event.preventDefault();
     var newStoreName = event.target.newStoreLocation.value;
-    var maxCustomers = 1*event.target.maxCustomers.value;
-    var minCustomers = 1*event.target.minCustomers.value;
-    var avgSales = 1*event.target.customerSales.value;
+    var maxCustomers = 1 * event.target.maxCustomers.value;
+    var minCustomers = 1 * event.target.minCustomers.value;
+    var avgSales = 1 * event.target.customerSales.value;
     arrayOfStores.push(new Store(newStoreName, minCustomers, maxCustomers, avgSales));
-    
+
     renderAll();
 
     //Reset the New Store Form
     document.getElementById("NewStoreForm").reset();
 }
-
 
 //  ===========================================================================

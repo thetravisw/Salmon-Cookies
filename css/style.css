@@ -139,6 +139,8 @@ p:not(#tagline){
 /* =================================================================
 Styling the Menu
 ==================================================================== */
+
+
 .LeftNRight{
     margin-top: 5%;
     display: inline-block;
@@ -156,16 +158,15 @@ h3{
 }
 
 #gross{
-    display: inline;
-    float: right;
-    min-width: 38%;
-    max-width: 38%;
+    display: inline-block;
+    max-width: 25%;
+    padding-left: 14%
 }
 
 li:not(.navbar) {
     font-family: 'Times New Roman', Times, serif;
     font-size: 1.3rem;
-    padding-bottom: 6%;
+    padding-bottom: 8%;
 }
 
 
@@ -211,5 +212,3 @@ input {
     float: right;
     margin-right: 13vw
   }
-
-
